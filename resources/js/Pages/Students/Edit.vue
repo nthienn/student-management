@@ -44,7 +44,11 @@ const getSections = (classId) => {
 };
 
 const updateStudent = () => {
-    form.put(route("students.update", student.id));
+    form.put(route("students.update", student.id), {
+        onSuccess: () => {
+            alert("Student updated successfully");
+        },
+    });
 };
 </script>
 

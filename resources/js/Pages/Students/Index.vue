@@ -72,7 +72,11 @@ const deleteForm = useForm({});
 
 const deleteStudent = (studentId) => {
     if (confirm("Are you sure you want to delete this student")) {
-        deleteForm.delete(route("students.destroy", studentId));
+        deleteForm.delete(route("students.destroy", studentId), {
+            onSuccess: () => {
+                alert("Student deleted successfully");
+            },
+        });
     }
 };
 </script>

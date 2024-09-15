@@ -35,7 +35,11 @@ const getSections = (classId) => {
 };
 
 const createStudent = () => {
-    form.post(route("students.store"));
+    form.post(route("students.store"), {
+        onSuccess: () => {
+            alert("Student created successfully");
+        },
+    });
 };
 </script>
 

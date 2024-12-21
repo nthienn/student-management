@@ -5,7 +5,7 @@ import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -37,16 +37,29 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Dashboard
                                 </NavLink>
-                            </div>
 
-                            <div
-                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
-                            >
                                 <NavLink
+                                    v-if="usePage().props.can.student_access"
                                     :href="route('students.index')"
-                                    :active="route().current('students.index')"
+                                    :active="
+                                        route().current('students.index') ||
+                                        route().current('students.create') ||
+                                        route().current('students.edit')
+                                    "
                                 >
                                     Students
+                                </NavLink>
+
+                                <NavLink
+                                    v-if="usePage().props.can.role_access"
+                                    :href="route('roles.index')"
+                                    :active="
+                                        route().current('roles.index') ||
+                                        route().current('roles.create') ||
+                                        route().current('roles.edit')
+                                    "
+                                >
+                                    Roles
                                 </NavLink>
                             </div>
                         </div>
@@ -154,6 +167,30 @@ const showingNavigationDropdown = ref(false);
                             :active="route().current('dashboard')"
                         >
                             Dashboard
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            v-if="usePage().props.can.student_access"
+                            :href="route('students.index')"
+                            :active="
+                                route().current('students.index') ||
+                                route().current('students.create') ||
+                                route().current('students.edit')
+                            "
+                        >
+                            Students
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            v-if="usePage().props.can.role_access"
+                            :href="route('roles.index')"
+                            :active="
+                                route().current('roles.index') ||
+                                route().current('roles.create') ||
+                                route().current('roles.edit')
+                            "
+                        >
+                            Roles
                         </ResponsiveNavLink>
                     </div>
 

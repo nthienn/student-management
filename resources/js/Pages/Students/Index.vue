@@ -71,7 +71,7 @@ watch(
 const deleteForm = useForm({});
 
 const deleteStudent = (studentId) => {
-    if (confirm("Are you sure you want to delete this student")) {
+    if (confirm("Are you sure you want to delete this Student?")) {
         deleteForm.delete(route("students.destroy", studentId), {
             onSuccess: () => {
                 alert("Student deleted successfully");
@@ -106,6 +106,7 @@ const deleteStudent = (studentId) => {
 
                         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                             <Link
+                                v-if="usePage().props.can.student_create"
                                 :href="route('students.create')"
                                 class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
                             >
@@ -246,6 +247,10 @@ const deleteStudent = (studentId) => {
                                                     class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
                                                 >
                                                     <Link
+                                                        v-if="
+                                                            usePage().props.can
+                                                                .student_edit
+                                                        "
                                                         :href="
                                                             route(
                                                                 'students.edit',
@@ -257,6 +262,10 @@ const deleteStudent = (studentId) => {
                                                         Edit
                                                     </Link>
                                                     <button
+                                                        v-if="
+                                                            usePage().props.can
+                                                                .student_delete
+                                                        "
                                                         @click="
                                                             deleteStudent(
                                                                 student.id

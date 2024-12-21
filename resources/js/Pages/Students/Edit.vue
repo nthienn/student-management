@@ -75,7 +75,7 @@ const updateStudent = () => {
                                         Student Information
                                     </h3>
                                     <p class="mt-1 text-sm text-gray-500">
-                                        Use this form to create a new student.
+                                        Use this form to edit a student.
                                     </p>
                                 </div>
 
